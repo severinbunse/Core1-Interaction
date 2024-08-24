@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Core 1: Interaction</title>
+    <style>
+        /* Define CSS variables for node and line styling */
+        :root {
+            --node-color: lightgrey; /* Color of nodes */
+            --line-color: blue; /* Color of lines */
+            --node-radius: 0px; /* Radius of nodes */
+            --line-width: 1px; /* Width of lines */
+            --font-size: 0px; /* Font size for node labels */
+        }
+
+        /* Ensure canvas covers the full viewport */
+        body {
+            margin: 30px;
+            font-family: sans-serif;
+        }
+
+
+
+ ul {
+    list-style-type: none;
+    padding: 0;
+ }
+
+ canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+ }
+
+#text {
+max-width: 400px;
+
+}
+
+p {
+
+}
+
+/* Hide canvas on screens narrower than 768px (common mobile width) */
+@media only screen and (max-width: 768px) {
+    canvas {
+        display: none !important;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+
+    <div id="text">
+    <h1>Core 1: Interaction</h1>
+
+    <ul class="info">
+        <li>Parsons 2 W 13th Room 500</li>
+        <li>Tuesdays, 09:00am – 11:40am</li>
+        <li>Instructor: Severin Bunse</li>
+        <li>Contact:  <a href="mailto:bunses@newschool.edu">bunses@newschool.edu</a></li>
+    </ul>
+    <h2>About</h2>
+    <p>This course  is designed to introduce students to programming as a creative medium—as a way of making and exploring. The coursework focuses on developing a vocabulary of interaction design principles which can then be applied across a range of platforms.<br><br> Students are encouraged to experiment with various media, tools, and techniques, ultimately producing a portfolio of interactive and visual projects designed for the screen. An emphasis is placed on typography as it applies to a screen context, research-based problem solving and a learning-through-making approach to technical skill building. Historical and current interaction design precedents will be discussed.</p>
+    
+    
+    <h2>Students</h2>
+
+    <a href="">Talia</a>,
+    <a href="">Serena</a>,
+    <a href="">Keyaa</a>,
+    <a href="">Christina</a>,
+    <a href="">Seoyeon</a>,
+    <a href="">Hyeonwoo</a>,
+    <a href="">Priyamvada</a>,
+    <a href="">Joanne</a>,
+    <a href="">Sarah</a>,
+    <a href="">Julia</a>,
+    <a href="">Eden</a>,
+    <a href="">Babika</a>,
+    <a href="">Kendall</a>,
+    <a href="">Jiwon</a>,
+    <a href="">Alesya</a>
+
+    <h2>Harmonic Collection</h2>
+    <p>You’re going to pick a theme to explore visually for the duration of the semester. Each week, you’ll design and code an entry to a collection that explores this theme. At the end of the semester, you’ll deliver a website that houses 10 programmed entries. The website container is part of the design, as well.</p>
+    <h2>Useful Links</h2>
+    <a href="">Syllabus</a><br>
+    <a href="">Schedule</a><br>
+    <a href="">Websites</a><br>
+    <a href="">Readings</a>
+    <h2>Software & Platforms</h2>
+    <a href="https://www.w3schools.com">W3Schools</a><br>
+    <a href="https://github.com">Github</a><br>
+    <a href="https://www.figma.com/">Figma</a><br>
+    <a href="https://code.visualstudio.com">Visual Studio Code</a>
+    <h2>Colophon</h2>
+    In putting together this site I was inspired by:<br>
+    Nikki Makagiansar's <a href="Core 1: Interaction">Core 1: Interaction site</a><br>
+    Brendan Griffith's <a href="https://interactionlab.glitch.me">Core 2: Interaction Lab site</a>
+    
+</div>
+
+    <canvas id="graphCanvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('graphCanvas');
+        const ctx = canvas.getContext('2d');
+        const devicePixelRatio = window.devicePixelRatio || 1; // Ensure high-resolution display support
+
+        // Adjust canvas size to match the window's dimensions and device pixel ratio
+        function setCanvasDimensions() {
+            canvas.width = window.innerWidth * devicePixelRatio;
+            canvas.height = window.innerHeight * devicePixelRatio;
+            canvas.style.width = `${window.innerWidth}px`;
+            canvas.style.height = `${window.innerHeight}px`;
+        }
+
+        let nodes = [];
+        let nodeMap = {};
+        let centerX, centerY;
+
+        // Initialize nodes with positions and add a central node
+        function initializeNodes() {
+            const numNodes = 7; // Number of main nodes
+            const padding = 0; // Padding from the edges
+            nodes = [];
+
+            for (let i = 0; i < numNodes; i++) {
+                let x, y;
+                if (i < numNodes / 4) {
+                    // Top-left corner
+                    x = padding;
+                    y = padding + (canvas.height - 2 * padding) * (i / (numNodes / 4));
+                } else if (i < numNodes / 2) {
+                    // Bottom-left corner
+                    x = padding + (canvas.width - 2 * padding) * ((i - numNodes / 4) / (numNodes / 4));
+                    y = canvas.height - padding;
+                } else if (i < 3 * numNodes / 4) {
+                    // Bottom-right corner
+                    x = canvas.width - padding;
+                    y = canvas.height - padding - (canvas.height - 2 * padding) * ((i - numNodes / 2) / (numNodes / 4));
+                } else {
+                    // Top-right corner
+                    x = canvas.width - padding - (canvas.width - 2 * padding) * ((i - 3 * numNodes / 4) / (numNodes / 4));
+                    y = padding;
+                }
+                const node = { id: i, x, y };
+                nodes.push(node);
+                nodeMap[node.id] = node;
+            }
+
+            // Central node positioned at the center of the canvas
+            centerX = canvas.width / 2;
+            centerY = canvas.height / 2;
+            const centralNode = { id: 'X', x: centerX, y: centerY };
+            nodes.push(centralNode);
+            nodeMap[centralNode.id] = centralNode;
+        }
+
+        // Draw the graph with nodes and lines
+        function drawGraph() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+
+            // Set up line styling
+            ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--line-color').trim();
+            ctx.lineWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--line-width')) * devicePixelRatio;
+
+            // Draw lines from each node to the central node
+            for (const node of nodes) {
+                if (node.id !== 'X') { // Skip the central node
+                    ctx.beginPath();
+                    ctx.moveTo(node.x, node.y);
+                    ctx.lineTo(centerX, centerY);
+                    ctx.stroke();
+                }
+            }
+
+            // Draw each node and its label
+            for (const node of nodes) {
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--node-radius')) * devicePixelRatio, 0, Math.PI * 2);
+                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--node-color').trim();
+                ctx.fill();
+                ctx.closePath();
+
+                /* this part styles the label for the center node
+                ctx.fillStyle = 'red';
+                ctx.textAlign = 'center';
+                ctx.font = `${parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-size')) * devicePixelRatio}px Arial`;
+                ctx.fillText(node.id, node.x, node.y - 10);
+                */
+            }
+
+            // Define manually added nodes and draw them
+            const manuallyAddedNodes = [
+                { id: '0A', x: centerX + (nodes[0].x - centerX) * 0.30, y: centerY + (nodes[0].y - centerY) * 0.30 },
+                { id: '0B', x: centerX + (nodes[0].x - centerX) * 0.60, y: centerY + (nodes[0].y - centerY) * 0.60 },
+                { id: '0C', x: centerX + (nodes[0].x - centerX) * 0.1, y: centerY + (nodes[0].y - centerY) * 0.1 },
+                
+                { id: '1A', x: centerX + (nodes[1].x - centerX) * 0.40, y: centerY + (nodes[1].y - centerY) * 0.40 },
+                { id: '1B', x: centerX + (nodes[1].x - centerX) * 0.70, y: centerY + (nodes[1].y - centerY) * 0.70 },
+                
+                { id: '2A', x: centerX + (nodes[2].x - centerX) * 0.30, y: centerY + (nodes[2].y - centerY) * 0.30 },
+                { id: '2B', x: centerX + (nodes[2].x - centerX) * 0.60, y: centerY + (nodes[2].y - centerY) * 0.60 },
+                
+                { id: '3A', x: centerX + (nodes[3].x - centerX) * 0.30, y: centerY + (nodes[3].y - centerY) * 0.30 },
+                { id: '3B', x: centerX + (nodes[3].x - centerX) * 0.60, y: centerY + (nodes[3].y - centerY) * 0.60 },
+
+                { id: '4A', x: centerX + (nodes[4].x - centerX) * 0.40, y: centerY + (nodes[4].y - centerY) * 0.40 },
+                { id: '4B', x: centerX + (nodes[4].x - centerX) * 0.70, y: centerY + (nodes[4].y - centerY) * 0.70 },
+
+                { id: '5A', x: centerX + (nodes[5].x - centerX) * 0.30, y: centerY + (nodes[5].y - centerY) * 0.30 },
+                { id: '5B', x: centerX + (nodes[5].x - centerX) * 0.60, y: centerY + (nodes[5].y - centerY) * 0.60 },
+
+                { id: '6A', x: centerX + (nodes[6].x - centerX) * 0.30, y: centerY + (nodes[6].y - centerY) * 0.30 },
+                { id: '6B', x: centerX + (nodes[6].x - centerX) * 0.60, y: centerY + (nodes[6].y - centerY) * 0.60 },
+            ];
+
+            manuallyAddedNodes.forEach(node => {
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--node-radius')) * devicePixelRatio, 0, Math.PI * 2);
+                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--node-color').trim();
+                ctx.fill();
+                ctx.closePath();
+
+                /* This part styles node labels
+                ctx.fillStyle = 'black';
+                ctx.textAlign = 'center';
+                ctx.font = `${parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-size')) * devicePixelRatio}px Arial`;
+                ctx.fillText(node.id, node.x, node.y - 10);
+                */
+                
+                nodeMap[node.id] = node;
+            });
+
+            // Draw lines between specific manually added nodes
+            drawLineBetweenNodesByName('0B', '1B');
+            drawLineBetweenNodesByName('1B', '2B');
+            drawLineBetweenNodesByName('0A', '1A');
+            drawLineBetweenNodesByName('1A', '2A');
+            drawLineBetweenNodesByName('2A', '3A');
+            drawLineBetweenNodesByName('2B', '3B');
+            drawLineBetweenNodesByName('3A', '4A');
+            drawLineBetweenNodesByName('3B', '4B');
+            drawLineBetweenNodesByName('4A', '5A');
+            drawLineBetweenNodesByName('4B', '5B');
+            drawLineBetweenNodesByName('5A', '6A');
+            drawLineBetweenNodesByName('5B', '6B');
+            drawLineBetweenNodesByName('6A', '0A');
+            drawLineBetweenNodesByName('6B', '0B');
+        }
+
+        // Draw a line between two nodes specified by their names
+        function drawLineBetweenNodesByName(nodeName1, nodeName2) {
+            const node1 = nodeMap[nodeName1];
+            const node2 = nodeMap[nodeName2];
+            if (node1 && node2) {
+                ctx.beginPath();
+                ctx.moveTo(node1.x, node1.y);
+                ctx.lineTo(node2.x, node2.y);
+                ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--line-color').trim();
+                ctx.lineWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--line-width')) * devicePixelRatio;
+                ctx.stroke();
+            }
+        }
+
+        // Set initial dimensions and draw the graph
+        setCanvasDimensions();
+        initializeNodes();
+        drawGraph();
+
+        // Update the central node's position and redraw the graph on mouse move
+        canvas.addEventListener('mousemove', (event) => {
+            centerX = event.clientX * devicePixelRatio;
+            centerY = event.clientY * devicePixelRatio;
+
+            const centralNode = nodes.find(node => node.id === 'X');
+            if (centralNode) {
+                centralNode.x = centerX;
+                centralNode.y = centerY;
+            }
+            drawGraph();
+        });
+
+// Hide the canvas on click
+canvas.addEventListener('click', () => {
+    canvas.style.display = 'none';
+});
+
+        // Redraw the graph on window resize
+        window.addEventListener('resize', () => {
+            setCanvasDimensions();
+            initializeNodes();
+            drawGraph();
+        });
+    </script>
+
+    
+</body>
+</html>
