@@ -247,12 +247,12 @@ p {
                 ctx.fill();
                 ctx.closePath();
 
-                //This part styles node labels
+                /*This part styles node labels
                 ctx.fillStyle = 'black';
                 ctx.textAlign = 'center';
                 ctx.font = `${parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-size')) * devicePixelRatio}px Arial`;
                 ctx.fillText(node.id, node.x, node.y - 10);
-                
+                */
                 
                 nodeMap[node.id] = node;
             });
