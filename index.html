@@ -11,7 +11,7 @@
             --line-color: blue; /* Color of lines */
             --node-radius: 0px; /* Radius of nodes */
             --line-width: 1px; /* Width of lines */
-            --font-size: 0px; /* Font size for node labels */
+            --font-size: 10px; /* Font size for node labels */
         }
 
         /* Ensure canvas covers the full viewport */
@@ -101,7 +101,7 @@ p {
     <a href="https://www.figma.com/">Figma</a><br>
     <a href="https://code.visualstudio.com">Visual Studio Code</a>
     <h2>Colophon</h2>
-    In putting together this site I was inspired by:<br>
+    This website is based on:<br>
     Nikki Makagiansar's <a href="Core 1: Interaction">Core 1: Interaction site</a><br>
     Brendan Griffith's <a href="https://interactionlab.glitch.me">Core 2: Interaction Lab site</a>
     
@@ -202,25 +202,42 @@ p {
             const manuallyAddedNodes = [
                 { id: '0A', x: centerX + (nodes[0].x - centerX) * 0.30, y: centerY + (nodes[0].y - centerY) * 0.30 },
                 { id: '0B', x: centerX + (nodes[0].x - centerX) * 0.60, y: centerY + (nodes[0].y - centerY) * 0.60 },
-                { id: '0C', x: centerX + (nodes[0].x - centerX) * 0.1, y: centerY + (nodes[0].y - centerY) * 0.1 },
-                
-                { id: '1A', x: centerX + (nodes[1].x - centerX) * 0.40, y: centerY + (nodes[1].y - centerY) * 0.40 },
+                { id: '0F', x: centerX + (nodes[0].x - centerX) * 0.45, y: centerY + (nodes[0].y - centerY) * 0.45 },
+                { id: '0C', x: centerX + (nodes[0].x - centerX) * 0.15, y: centerY + (nodes[0].y - centerY) * 0.15 },
+                { id: '0D', x: centerX + (nodes[0].x - centerX) * 0.07, y: centerY + (nodes[0].y - centerY) * 0.07 },
+
+                { id: '1A', x: centerX + (nodes[1].x - centerX) * 0.35, y: centerY + (nodes[1].y - centerY) * 0.35 },
                 { id: '1B', x: centerX + (nodes[1].x - centerX) * 0.70, y: centerY + (nodes[1].y - centerY) * 0.70 },
+                { id: '1F', x: centerX + (nodes[1].x - centerX) * 0.52, y: centerY + (nodes[1].y - centerY) * 0.52 },
+                { id: '1C', x: centerX + (nodes[1].x - centerX) * 0.18, y: centerY + (nodes[1].y - centerY) * 0.18 },
+                { id: '1D', x: centerX + (nodes[1].x - centerX) * 0.09, y: centerY + (nodes[1].y - centerY) * 0.09 },
+
+                { id: '2A', x: centerX + (nodes[2].x - centerX) * 0.35, y: centerY + (nodes[2].y - centerY) * 0.35 },
+                { id: '2B', x: centerX + (nodes[2].x - centerX) * 0.70, y: centerY + (nodes[2].y - centerY) * 0.70 },
+                { id: '2F', x: centerX + (nodes[2].x - centerX) * 0.52, y: centerY + (nodes[2].y - centerY) * 0.52 },
+                { id: '2C', x: centerX + (nodes[2].x - centerX) * 0.18, y: centerY + (nodes[2].y - centerY) * 0.18 },
+                { id: '2D', x: centerX + (nodes[2].x - centerX) * 0.09, y: centerY + (nodes[2].y - centerY) * 0.09 },
                 
-                { id: '2A', x: centerX + (nodes[2].x - centerX) * 0.30, y: centerY + (nodes[2].y - centerY) * 0.30 },
-                { id: '2B', x: centerX + (nodes[2].x - centerX) * 0.60, y: centerY + (nodes[2].y - centerY) * 0.60 },
-                
-                { id: '3A', x: centerX + (nodes[3].x - centerX) * 0.30, y: centerY + (nodes[3].y - centerY) * 0.30 },
-                { id: '3B', x: centerX + (nodes[3].x - centerX) * 0.60, y: centerY + (nodes[3].y - centerY) * 0.60 },
+                { id: '3A', x: centerX + (nodes[3].x - centerX) * 0.50, y: centerY + (nodes[3].y - centerY) * 0.50 },
+                { id: '3B', x: centerX + (nodes[3].x - centerX) * 0.90, y: centerY + (nodes[3].y - centerY) * 0.90 },
+                { id: '3C', x: centerX + (nodes[3].x - centerX) * 0.27, y: centerY + (nodes[3].y - centerY) * 0.27 },
+                { id: '3D', x: centerX + (nodes[3].x - centerX) * 0.12, y: centerY + (nodes[3].y - centerY) * 0.12 },
 
                 { id: '4A', x: centerX + (nodes[4].x - centerX) * 0.40, y: centerY + (nodes[4].y - centerY) * 0.40 },
                 { id: '4B', x: centerX + (nodes[4].x - centerX) * 0.70, y: centerY + (nodes[4].y - centerY) * 0.70 },
+                { id: '4C', x: centerX + (nodes[4].x - centerX) * 0.23, y: centerY + (nodes[4].y - centerY) * 0.23 },
+                { id: '4D', x: centerX + (nodes[4].x - centerX) * 0.11, y: centerY + (nodes[4].y - centerY) * 0.11 },
 
-                { id: '5A', x: centerX + (nodes[5].x - centerX) * 0.30, y: centerY + (nodes[5].y - centerY) * 0.30 },
+                { id: '5A', x: centerX + (nodes[5].x - centerX) * 0.35, y: centerY + (nodes[5].y - centerY) * 0.35 },
                 { id: '5B', x: centerX + (nodes[5].x - centerX) * 0.60, y: centerY + (nodes[5].y - centerY) * 0.60 },
+                { id: '5C', x: centerX + (nodes[5].x - centerX) * 0.18, y: centerY + (nodes[5].y - centerY) * 0.18 },
+                { id: '5D', x: centerX + (nodes[5].x - centerX) * 0.09, y: centerY + (nodes[5].y - centerY) * 0.09 },
 
-                { id: '6A', x: centerX + (nodes[6].x - centerX) * 0.30, y: centerY + (nodes[6].y - centerY) * 0.30 },
-                { id: '6B', x: centerX + (nodes[6].x - centerX) * 0.60, y: centerY + (nodes[6].y - centerY) * 0.60 },
+                { id: '6A', x: centerX + (nodes[6].x - centerX) * 0.47, y: centerY + (nodes[6].y - centerY) * 0.47 },
+                { id: '6B', x: centerX + (nodes[6].x - centerX) * 0.90, y: centerY + (nodes[6].y - centerY) * 0.90 },
+                { id: '6C', x: centerX + (nodes[6].x - centerX) * 0.22, y: centerY + (nodes[6].y - centerY) * 0.22 },
+                { id: '6D', x: centerX + (nodes[6].x - centerX) * 0.11, y: centerY + (nodes[6].y - centerY) * 0.11 },
+
             ];
 
             manuallyAddedNodes.forEach(node => {
@@ -230,31 +247,54 @@ p {
                 ctx.fill();
                 ctx.closePath();
 
-                /* This part styles node labels
+                //This part styles node labels
                 ctx.fillStyle = 'black';
                 ctx.textAlign = 'center';
                 ctx.font = `${parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-size')) * devicePixelRatio}px Arial`;
                 ctx.fillText(node.id, node.x, node.y - 10);
-                */
+                
                 
                 nodeMap[node.id] = node;
             });
 
             // Draw lines between specific manually added nodes
-            drawLineBetweenNodesByName('0B', '1B');
-            drawLineBetweenNodesByName('1B', '2B');
             drawLineBetweenNodesByName('0A', '1A');
+            drawLineBetweenNodesByName('0B', '1B');
+            drawLineBetweenNodesByName('0C', '1C');
+            drawLineBetweenNodesByName('0D', '1D');
+            drawLineBetweenNodesByName('0F', '1F');
+
             drawLineBetweenNodesByName('1A', '2A');
+            drawLineBetweenNodesByName('1B', '2B');
+            drawLineBetweenNodesByName('1C', '2C');
+            drawLineBetweenNodesByName('1D', '2D');
+            drawLineBetweenNodesByName('1F', '2F');
+
             drawLineBetweenNodesByName('2A', '3A');
             drawLineBetweenNodesByName('2B', '3B');
+            drawLineBetweenNodesByName('2C', '3C');
+            drawLineBetweenNodesByName('2D', '3D');
+
             drawLineBetweenNodesByName('3A', '4A');
             drawLineBetweenNodesByName('3B', '4B');
+            drawLineBetweenNodesByName('3C', '4C');
+            drawLineBetweenNodesByName('3D', '4D');
+
             drawLineBetweenNodesByName('4A', '5A');
             drawLineBetweenNodesByName('4B', '5B');
+            drawLineBetweenNodesByName('4C', '5C');
+            drawLineBetweenNodesByName('4D', '5D');
+
             drawLineBetweenNodesByName('5A', '6A');
             drawLineBetweenNodesByName('5B', '6B');
+            drawLineBetweenNodesByName('5C', '6C');
+            drawLineBetweenNodesByName('5D', '6D');
+
             drawLineBetweenNodesByName('6A', '0A');
             drawLineBetweenNodesByName('6B', '0B');
+            drawLineBetweenNodesByName('6C', '0C');
+            drawLineBetweenNodesByName('6D', '0D');
+            
         }
 
         // Draw a line between two nodes specified by their names
